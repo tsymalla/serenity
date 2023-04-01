@@ -29,6 +29,9 @@ public:
     bool is_grouped() const { return m_grouped; }
     void set_grouped(bool b) { m_grouped = b; }
 
+    void set_button_size(int button_size);
+    int get_button_size() const { return m_button_size; }
+
     virtual Optional<UISize> calculated_preferred_size() const override;
     virtual Optional<UISize> calculated_min_size() const override;
 
@@ -60,6 +63,8 @@ private:
     int m_button_size { 24 };
     bool m_collapsible { false };
     bool m_grouped { false };
+
+    void update_size();
 };
 
 }

@@ -349,6 +349,13 @@ void BrowserWindow::build_menus()
         add_color_scheme_action("Follow system theme", Web::CSS::PreferredColorScheme::Auto);
         add_color_scheme_action("Light", Web::CSS::PreferredColorScheme::Light);
         add_color_scheme_action("Dark", Web::CSS::PreferredColorScheme::Dark);
+
+        auto toolbar_size_action = GUI::Action::create_checkable(
+            "Large toolbar &icons", [=, this](auto& action) {
+                active_tab().set_toolbar_button_size(action.is_checked());
+            },
+            this);
+        settings_menu.add_action(toolbar_size_action);
     }
 
     settings_menu.add_separator();

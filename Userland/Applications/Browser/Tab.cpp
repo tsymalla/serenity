@@ -828,6 +828,14 @@ void Tab::hide_event(GUI::HideEvent&)
     m_web_content_view->set_visible(false);
 }
 
+void Tab::set_toolbar_button_size(bool large)
+{
+    auto &toolbar = *find_descendant_of_type_named<GUI::Toolbar>("toolbar");
+    int size = toolbar.get_button_size();
+    int new_size = large ? (size * 2) : (size / 2);
+    toolbar.set_button_size(new_size);
+}
+
 void Tab::enable_webdriver_mode()
 {
     m_web_content_view->connect_to_webdriver(Browser::g_webdriver_content_ipc_path);

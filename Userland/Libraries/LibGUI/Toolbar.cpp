@@ -34,7 +34,40 @@ Toolbar::Toolbar(Orientation orientation, int button_size)
     else
         set_fixed_width(button_size);
 
+    update_size();
+
     set_layout<BoxLayout>(orientation, GUI::Margins { 2, 2, 2, 2 }, 0);
+}
+
+void Toolbar::set_button_size(int button_size)
+{
+    if (button_size == 0)
+        return;
+
+    m_button_size = button_size;
+    update_size();
+
+    bool is_horizontal = m_orientation == Orientation::Horizontal;
+
+    for (size_t idx = 0; idx < m_items.size(); ++idx)
+    {
+        auto &item = m_items[idx];
+        if (item->type == Item::Type::Action)
+        {
+            if (is_horizontal)
+                static_cast<Button*>(item->widget.ptr())->set_height(button_size);
+            else
+                static_cast<Button*>(item->widget.ptr())->set_width(button_size);
+        }
+    }
+}
+
+void Toolbar::update_size()
+{    
+    if (m_orientation == Orientation::Horizontal)
+        set_fixed_height(m_button_size);
+    else
+        set_fixed_width(m_button_size);
 }
 
 class ToolbarButton final : public Button {

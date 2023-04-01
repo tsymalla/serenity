@@ -92,6 +92,8 @@ public:
 
     void update_reset_zoom_button();
 
+    void set_toolbar_button_size(bool large);
+
     DeprecatedString const& title() const { return m_title; }
     Gfx::Bitmap const* icon() const { return m_icon; }
 

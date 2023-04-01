@@ -8,6 +8,7 @@
 
         @GUI::Toolbar {
             name: "toolbar"
+            button_size: 48
         }
     }
 
